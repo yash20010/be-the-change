@@ -11,6 +11,7 @@ const logger = require('morgan'); // bring morgan to ensure requests
 const connectDB = require('./config/database');
 const mainRoutes = require('./routes/main'); //assigning main routes path to a variable
 const userRoutes = require('./routes/users');
+// const transactionsRoutes = require('/routes/transactions');
 
 // environment file
 require('dotenv').config({ path: './config/.env' });
@@ -54,6 +55,7 @@ app.use((request, response, next) => {
 // Routes
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
+// app.use('/transactions', transactionsRoutes)
 
 // PORT for localhost
 app.listen(

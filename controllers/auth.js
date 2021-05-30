@@ -1,5 +1,5 @@
 const passport = require('passport');
-const User = require('../models/User');
+const User = require('../models/User'); //bringing in model to call methods on it
 
 exports.getLogin = (request, response) => response.render('login');
 
@@ -33,7 +33,7 @@ exports.postRegister = (request, response) => {
     errors.push({ msg: 'Password should be at least 8 characters' });
   }
 
-  // errors not rendering...
+  // errors rendering...
   if (errors.length > 0) {
     response.render('register', {
       errors,
@@ -88,6 +88,6 @@ exports.postRegister = (request, response) => {
 
 exports.logout = (request, response) => {
   request.logout();
-  request.flash('Success_mesg', 'You are logged out');
+  request.flash('success_msg', 'You are logged out');
   response.redirect('/users/login');
 };
