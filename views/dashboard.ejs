@@ -9,7 +9,7 @@
         <i class="fas fa-money-check-alt"></i> Donation
       </h1>
       <%- include ('./partials/messages') %>
-      <form action="/users/expenses" method="POST">
+      <form action="/user/expenses" method="POST">
         <div class="form-group">
           <label for="expense">Expense</label>
           <input
@@ -29,17 +29,17 @@
             class="form-control"
             placeholder="Enter Amount"
           />
+          <fieldset>
+            <label class="form-label mt-4" for="donation">Donation</label>
+            <input
+              class="form-control"
+              id="donation"
+              type="text"
+              placeholder="Donation from expense"
+              readonly=""
+            />
+          </fieldset>
         </div>
-        <fieldset>
-          <label class="form-label mt-4" for="donation">Donation</label>
-          <input
-            class="form-control"
-            id="donation"
-            type="text"
-            placeholder="Donation from expense"
-            readonly=""
-          />
-        </fieldset>
         <button type="submit" class="btn btn-primary btn-block">Donate</button>
       </form>
     </div>

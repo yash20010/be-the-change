@@ -3,7 +3,6 @@ const router = express.Router(); //brings in Router Object
 const authController = require('../controllers/auth');
 const { ensureAuth, ensureGuest } = require('../middleware/auth');
 const expensesController = require('../controllers/expenses');
-const expenses = require('../controllers/expenses');
 
 //Login Page
 router.get('/login', ensureGuest, authController.getLogin);
@@ -21,9 +20,9 @@ router.post('/register', authController.postRegister);
 router.get('/logout', authController.logout);
 
 // get expenses
-router.get('/:id', ensureAuth, expensesController.expensesGet);
+router.get('/:id', ensureAuth, expensesController.getExpenses);
 
 // expense(s) handle
-router.post('/expense', ensureAuth, expensesController.expensesPost);
+router.post('/expenses', ensureAuth, expensesController.postExpenses);
 
 module.exports = router;
