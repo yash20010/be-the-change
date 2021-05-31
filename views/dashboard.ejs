@@ -1,3 +1,47 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<h1 class="mt-4">Welcome <%= name %></h1>
+<p class="lead mb-3">
+  <a href="/users/logout" class="btn btn-secondary">Logout</a>
+</p>
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="">
+      <h1 class="text-center mb-3">
+        <i class="fas fa-money-check-alt"></i> Donation
+      </h1>
+      <%- include ('./partials/messages') %>
+      <form action="/users/expenses" method="POST">
+        <div class="form-group">
+          <label for="expense">Expense</label>
+          <input
+            type="expense"
+            id="expense"
+            name="expense"
+            class="form-control"
+            placeholder="Enter Expense"
+          />
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="amount"
+            id="amount"
+            name="amount"
+            class="form-control"
+            placeholder="Enter Amount"
+          />
+        </div>
+        <fieldset>
+          <label class="form-label mt-4" for="donation">Donation</label>
+          <input
+            class="form-control"
+            id="donation"
+            type="text"
+            placeholder="Donation from expense"
+            readonly=""
+          />
+        </fieldset>
+        <button type="submit" class="btn btn-primary btn-block">Donate</button>
+      </form>
+    </div>
+  </div>
+</div>

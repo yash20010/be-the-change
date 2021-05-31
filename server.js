@@ -1,17 +1,16 @@
 const express = require('express'); //brings in express
 const app = express(); //assigning the returned express function to 'app'
-const PORT = process.env.PORT || 5000; //PORT for deployment or localhost
-const expressLayouts = require('express-ejs-layouts'); //bring in ejs layouts
 const mongoose = require('mongoose');
+const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const passport = require('passport');
+const methodOverride = require('method-override');
+const expressLayouts = require('express-ejs-layouts'); //bring in ejs layouts
 const flash = require('connect-flash'); // redirects messages after register
 const logger = require('morgan'); // bring morgan to ensure requests
 const connectDB = require('./config/database');
 const mainRoutes = require('./routes/main'); //assigning main routes path to a variable
 const userRoutes = require('./routes/users');
-// const transactionsRoutes = require('/routes/transactions');
 
 // environment file
 require('dotenv').config({ path: './config/.env' });
@@ -55,10 +54,10 @@ app.use((request, response, next) => {
 // Routes
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
-// app.use('/transactions', transactionsRoutes)
 
 // PORT for localhost
-app.listen(
-  PORT,
-  console.log(`the ${PORT} server is running; you better catch it!`)
-);
+app.listen(process.env.PORT, () => {
+  console.log(
+    `the ${process.env.PORT} server is running; you better catch it!`
+  );
+});
