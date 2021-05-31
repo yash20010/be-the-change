@@ -13,12 +13,16 @@ const TransactionsSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  newTotal: {
+    type: Number,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,
   },
   userId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     index: true,
     required: true,
@@ -28,4 +32,4 @@ const TransactionsSchema = new mongoose.Schema({
 // put schema in variable
 const Transactions = mongoose.model('Transactions', TransactionsSchema);
 
-module.exports = User;
+module.exports = Transactions;
