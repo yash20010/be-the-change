@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const TransactionsSchema = new mongoose.Schema({
-  expense: {
+const ExpensesSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
   },
@@ -11,11 +11,11 @@ const TransactionsSchema = new mongoose.Schema({
   },
   donation: {
     type: Number,
-    required: true,
+    required: false,
   },
-  newTotal: {
+  total: {
     type: Number,
-    required: true,
+    required: false,
   },
   date: {
     type: Date,
@@ -24,12 +24,10 @@ const TransactionsSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    index: true,
-    required: true,
   },
 });
 
 // put schema in variable
-const Transactions = mongoose.model('Transactions', TransactionsSchema);
+const Expenses = mongoose.model('Expenses', ExpensesSchema);
 
-module.exports = Transactions;
+module.exports = Expenses;

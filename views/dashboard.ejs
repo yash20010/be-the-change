@@ -2,46 +2,53 @@
 <p class="lead mb-3">
   <a href="/users/logout" class="btn btn-secondary">Logout</a>
 </p>
-<div class="row mt-5">
+<div class="row mt-3">
   <div class="col-md-6 m-auto">
-    <div class="">
-      <h1 class="text-center mb-3">
-        <i class="fas fa-money-check-alt"></i> Donation
-      </h1>
-      <%- include ('./partials/messages') %>
-      <form action="/user/expenses" method="POST">
-        <div class="form-group">
-          <label for="expense">Expense</label>
-          <input
-            type="expense"
-            id="expense"
-            name="expense"
-            class="form-control"
-            placeholder="Enter Expense"
-          />
-        </div>
-        <div class="form-group">
-          <label for="amount">Amount</label>
-          <input
-            type="amount"
-            id="amount"
-            name="amount"
-            class="form-control"
-            placeholder="Enter Amount"
-          />
-          <fieldset>
-            <label class="form-label mt-4" for="donation">Donation</label>
-            <input
-              class="form-control"
-              id="donation"
-              type="text"
-              placeholder="Donation from expense"
-              readonly=""
-            />
-          </fieldset>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Donate</button>
-      </form>
-    </div>
+    <h3 class="text-center mb-3">
+      <i class="fas fa-money-check-alt fa-md"></i> List of Donations
+    </h3>
+    <%- include ('./partials/messages') %>
+      <div class="form-group">
+        <ul>
+          <% for (let i = 0; i < expense.length; i++) { %>
+          <li data-id='<%= element._id %>''>
+            <span><%= element[i].name %></span>
+            <span><%= element[i].amount %></span>
+            <span><%= element[i].donation %></span>
+            <span><%= element[i].total %></span>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-md-6 m-auto">
+    <h3 class="text-center mb-3">
+      <i class="fas fa-money-check-alt fa-md"></i> Expenses to Round Up
+    </h3>
+    <form action="/users/expenses" method="POST">
+      <div class="form-group">
+        <label for="name">Expense</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          placeholder="Enter Expense"
+        />
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input
+          type="text"
+          id="amount"
+          name="amount"
+          class="form-control"
+          placeholder="Enter Amount"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Donate</button>
+    </form>
   </div>
 </div>
