@@ -11,7 +11,11 @@ const ExpensesSchema = new mongoose.Schema({
   },
   donation: {
     type: Number,
-    required: false,
+    required: true,
+  },
+  total: {
+    type: Number,
+    required: true,
   },
   date: {
     type: Date,

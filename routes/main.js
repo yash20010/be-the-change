@@ -5,7 +5,7 @@ const expensesController = require('../controllers/expenses');
 const { ensureAuth, ensureGuest } = require('../middleware/auth');
 
 //index page as route is just root '/'
-router.get('/', mainController.getIndex);
+router.get('/', ensureGuest, mainController.getIndex);
 
 // dashboard route
 router.get('/dashboard', ensureAuth, expensesController.getExpenses);
