@@ -7,11 +7,10 @@ module.exports = {
     response.render('dashboard', {
       // shows username when dashboard rendered
       name: request.user.name,
-      expense: {
+      expenses: {
         name,
         amount,
         donation,
-        total,
       },
     });
   },

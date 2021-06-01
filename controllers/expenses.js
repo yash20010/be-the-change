@@ -2,27 +2,29 @@ const Expenses = require('../models/Expenses');
 
 module.exports = {
   getExpenses: async (request, response) => {
-    const { name, amount, donation, total } = request.body;
+    const { name, amount, donation, date } = request.body;
     try {
-      const expense = await Expenses.find({ user: request.user.id });
+      const expenses = await Expenses.find({ user: request.user.id });
       response.render('dashboard.ejs', {
-        name,
-        amount,
-        donation,
-        total,
+        expenses: {
+          name,
+          amount,
+          donation,
+          date,
+        },
       });
+      console.log(user);
     } catch (error) {
       console.log(error);
     }
   },
   postExpenses: async (request, response) => {
-    const { name, amount, donation, total } = request.body;
+    const { name, amount, donation } = request.body;
     try {
       await Expenses.create({
         name,
         amount,
-        donation: Math.ceil(amount) - amount,
-        total: amount + donation,
+        donation: (Math.ceil(amount) - amount).toFixed(2),
         user: request.user.id,
       });
       console.log('hope this works');
