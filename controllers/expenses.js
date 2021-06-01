@@ -6,7 +6,8 @@ module.exports = {
     try {
       const expenses = await Expenses.find({ user: request.user.id });
       response.render('dashboard.ejs', {
-        date,
+        name: request.user.name,
+        // date,
         expenses,
         name,
         amount,
