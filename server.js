@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const methodOverride = require('method-override');
 const expressLayouts = require('express-ejs-layouts'); //bring in ejs layouts
 const flash = require('connect-flash'); // redirects messages after register
 const logger = require('morgan'); // bring morgan to ensure requests

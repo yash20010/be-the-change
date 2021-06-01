@@ -5,17 +5,17 @@
 <div class="row mt-3">
   <div class="col-md-6 m-auto">
     <h3 class="text-center mb-3">
-      <i class="fas fa-money-check-alt fa-md"></i> List of Donations
+      <i class="fas fa-list-ol fa-md"></i> List of Donations
     </h3>
     <%- include ('./partials/messages') %>
       <div class="form-group">
         <ul>
-          <% for (let i = 0; i < expense.length; i++) { %>
-          <li data-id='<%= element._id %>''>
-            <span><%= element[i].name %></span>
-            <span><%= element[i].amount %></span>
-            <span><%= element[i].donation %></span>
-            <span><%= element[i].total %></span>
+          <% for (let i = 0; i < expenses.length; i++) { %>
+          <li data-id='<%= expenses._id %>''>
+            <span><%= expenses[i].name %></span>
+            <span><%= expenses[i].amount %></span>
+            <span><%= expenses[i].donation %></span>
+            <span><%= expenses[i].total %></span>
           </li>
           <% } %>
         </ul>

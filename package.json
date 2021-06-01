@@ -21,7 +21,6 @@
     "express-ejs-layouts": "^2.5.0",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
-    "method-override": "^3.0.0",
     "mongo-connect": "^0.0.6",
     "mongodb": "^3.6.8",
     "mongoose": "^5.12.11",
