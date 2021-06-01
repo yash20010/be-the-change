@@ -19,9 +19,6 @@ router.post('/register', authController.postRegister);
 // logout handle
 router.get('/logout', authController.logout);
 
-// get expenses
-router.get('/:id', ensureAuth, expensesController.getExpenses);
-
 // expense(s) handle
 router.post('/expenses', ensureAuth, expensesController.postExpenses);
 

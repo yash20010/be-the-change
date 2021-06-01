@@ -6,14 +6,12 @@ module.exports = {
     try {
       const expenses = await Expenses.find({ user: request.user.id });
       response.render('dashboard.ejs', {
-        expenses: {
-          name,
-          amount,
-          donation,
-          date,
-        },
+        expenses,
+        name,
+        amount,
+        donation,
+        date,
       });
-      console.log(user);
     } catch (error) {
       console.log(error);
     }
