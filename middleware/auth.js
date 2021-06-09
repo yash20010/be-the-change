@@ -1,5 +1,5 @@
 module.exports = {
-  //protect any route w/o longin
+  //protect any route w/o login
   ensureAuth: function (request, response, next) {
     if (request.isAuthenticated()) {
       return next();
