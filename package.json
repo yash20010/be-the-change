@@ -19,14 +19,15 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
-    "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
+    "moment": "^2.29.1",
     "mongo-connect": "^0.0.6",
     "mongodb": "^3.6.8",
     "mongoose": "^5.12.11",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "plaid": "^9.0.0-beta.13"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
