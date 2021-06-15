@@ -8,8 +8,11 @@ const expressLayouts = require('express-ejs-layouts'); //bring in ejs layouts
 const flash = require('connect-flash'); // redirects messages after register
 const logger = require('morgan'); // bring morgan to ensure requests
 const connectDB = require('./config/database');
+
+//Routes
 const mainRoutes = require('./routes/main'); //assigning main routes path to a variable
 const userRoutes = require('./routes/users');
+const apiRoutes = require('./routes/plaid');
 
 // environment file
 require('dotenv').config({ path: './config/.env' });
@@ -23,6 +26,7 @@ connectDB();
 // middleware
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(flash());
@@ -53,6 +57,7 @@ app.use((request, response, next) => {
 // Routes
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
+app.use('/plaid', apiRoutes);
 
 // PORT for localhost
 app.listen(process.env.PORT, () => {
