@@ -1,14 +1,13 @@
-const Expenses = require('../models/Expenses');
+const Account = require('../models/Account');
 
 module.exports = {
-  getExpenses: async (request, response) => {
+  getAccount: async (request, response) => {
     const { name, amount, donation, date, total } = request.body;
     try {
-      const expenses = await Expenses.find({ user: request.user.id });
+      const account = await Account.find({ user: request.user.id });
       response.render('dashboard.ejs', {
         name: request.user.name,
-        // date,
-        expenses,
+        account,
         name,
         amount,
         donation,
