@@ -2,6 +2,7 @@
 <p class="lead mb-3">
   <a href="/users/logout" class="btn btn-secondary">Logout</a>
 </p>
+<button id="link-button" class="lead mb-3 btn btn-primary">Link Account</button>
 <div class="row mt-3">
   <div class="col-md-6 m-auto">
     <h3 class="text-center mb-3">
@@ -18,13 +19,13 @@
           <th scope="col">Total</th>
         </tr>
       </thead>
-      <% for(let i = 0; i < expenses.length; i++ ) { %>
+      <% for(let i = 0; i < account.length; i++ ) { %>
       <tbody>
         <tr class="table-secondary">
-          <td><%= expenses[i].name %></td>
-          <td><%= expenses[i].amount %></td>
-          <td><%= expenses[i].donation %></td>
-          <td><%= expenses[i].total %></td>
+          <td><%= account[i].name %></td>
+          <td><%= account[i].amount %></td>
+          <td><%= account[i].donation %></td>
+          <td><%= account[i].total %></td>
         </tr>
       </tbody>
       <% } %>
@@ -61,3 +62,59 @@
     </form>
   </div>
 </div>
+
+<!-- TESTING THE LINK API -->
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+<script type="text/javascript">
+  (async function () {
+    const fetchLinkToken = async () => {
+      //on page load create link_token
+      const response = await fetch('/plaid/create_link_token', {
+        method: 'POST',
+      });
+      const responseJSON = await response.json();
+      return responseJSON.link_token;
+    };
+
+    const configs = {
+      // 1. Pass a new link_token to Link.
+      token: await fetchLinkToken(),
+      onSuccess: async function (public_token, metadata) {
+        // 2a. Send the public_token to your app server.
+        // The onSuccess function is called when the user has successfully
+        // authenticated and selected an account to use.
+        await fetch('/plaid/exchange_token', {
+          method: 'POST',
+          body: JSON.stringify({
+            public_token: public_token,
+            accounts: metadata.accounts,
+          }),
+          // headers: {
+          //   'Content-Type': 'application/json',
+          // },
+        });
+      },
+      onExit: async function (err, metadata) {
+        // 2b. Gracefully handle the invalid link token error. A link token
+        // can become invalidated if it expires, has already been used
+        // for a link session, or is associated with too many invalid logins.
+        if (err != null && err.error_code === 'INVALID_LINK_TOKEN') {
+          linkHandler.destroy();
+          linkHandler = Plaid.create({
+            ...configs,
+            token: await fetchLinkToken(),
+          });
+        }
+        // metadata contains information about the institution that the
+        // user selected and the most recent API request IDs.
+        // Storing this information can be helpful for support.
+      },
+    };
+
+    var linkHandler = Plaid.create(configs);
+
+    document.getElementById('link-button').onclick = function () {
+      linkHandler.open();
+    };
+  })();
+</script>
