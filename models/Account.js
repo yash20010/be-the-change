@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const AccountSchema = new mongoose.Schema({
   userId: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
   accessToken: {
     type: String,
@@ -17,17 +17,22 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  institutionName: {
-    type: String,
-  },
   accountName: {
-    type: String,
-  },
-  accountType: {
     type: String,
   },
   accountSubtype: {
     type: String,
   },
+  donation: {
+    type: Number,
+    required: true,
+  },
+  total: {
+    type: Number,
+    required: true,
+  },
 });
-module.exports = Account = mongoose.model('account', AccountSchema);
+
+const Account = mongoose.model('Account', AccountSchema);
+
+module.exports = Account;

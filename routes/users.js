@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router(); //brings in Router Object
 const authController = require('../controllers/auth');
 const { ensureAuth, ensureGuest } = require('../middleware/auth');
-const expensesController = require('../controllers/expenses');
+const expensesController = require('../controllers/accounts');
 
 //Login Page
 router.get('/login', ensureGuest, authController.getLogin);
@@ -20,6 +20,6 @@ router.post('/register', authController.postRegister);
 router.get('/logout', authController.logout);
 
 // expense(s) handle
-router.post('/expenses', ensureAuth, expensesController.postExpenses);
+router.post('/accounts', ensureAuth, expensesController.postExpenses);
 
 module.exports = router;
