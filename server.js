@@ -9,13 +9,14 @@ const flash = require('connect-flash'); // redirects messages after register
 const logger = require('morgan'); // bring morgan to ensure requests
 const connectDB = require('./config/database');
 
+// environment file
+require('dotenv').config({ path: './config/.env' });
+
 //Routes
 const mainRoutes = require('./routes/main'); //assigning main routes path to a variable
 const userRoutes = require('./routes/users');
 const apiRoutes = require('./routes/plaid');
 
-// environment file
-require('dotenv').config({ path: './config/.env' });
 
 // passport config
 require('./config/passport')(passport);

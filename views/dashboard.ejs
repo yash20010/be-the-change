@@ -69,29 +69,24 @@
   (async function () {
     const fetchLinkToken = async () => {
       //on page load create link_token
-      const response = await fetch('/plaid/create_link_token', {
-        method: 'POST',
-      });
-      const responseJSON = await response.json();
-      return responseJSON.link_token;
+      const response = await fetch('plaid/create_link_token');
+      const { linkToken } = await response.json();
+      return linkToken;
     };
 
     const configs = {
       // 1. Pass a new link_token to Link.
       token: await fetchLinkToken(),
-      onSuccess: async function (public_token, metadata) {
+      onSuccess: async function (publicToken, metadata) {
         // 2a. Send the public_token to your app server.
         // The onSuccess function is called when the user has successfully
         // authenticated and selected an account to use.
         await fetch('/plaid/exchange_token', {
           method: 'POST',
-          body: JSON.stringify({
-            public_token: public_token,
-            accounts: metadata.accounts,
-          }),
-          // headers: {
-          //   'Content-Type': 'application/json',
-          // },
+          body: JSON.stringify({publicToken}),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
       },
       onExit: async function (err, metadata) {
@@ -109,9 +104,12 @@
         // user selected and the most recent API request IDs.
         // Storing this information can be helpful for support.
       },
+      onEvent: async (metadata) => {
+        console.log(metadata);
+      }
     };
 
-    var linkHandler = Plaid.create(configs);
+    const linkHandler = Plaid.create(configs);
 
     document.getElementById('link-button').onclick = function () {
       linkHandler.open();
